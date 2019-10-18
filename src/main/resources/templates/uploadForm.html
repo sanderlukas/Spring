@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Uploader</title>
+</head>
+<body>
+<div style="margin: 0 auto">
+    <div th:if="${message}">
+        <h2 th:text="${message}"></h2>
+    </div>
+    <div>
+        <form method="POST" enctype="multipart/form-data" action="/">
+            <label>File to upload:</label>
+            <input type="file" name="file" accept="image/*" required/>
+            <input type="submit" value="Upload"/>
+        </form>
+    </div>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Format</th>
+                <th>Height</th>
+                <th>Width</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="file : ${files}">
+                <td><a th:href="@{${file.fileDownloadUri}}" th:text="${file.fileName}">Name</a></td>
+                <td th:text="${file.fileType}">Format</td>
+                <td th:text="${file.width}">Width</td>
+                <td th:text="${file.height}">Height</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
